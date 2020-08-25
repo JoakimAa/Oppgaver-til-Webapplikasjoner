@@ -1,1 +1,1 @@
-# Oppgaver-til-Webapplikasjoner
+# Oppgaver til Webapplikasjoner
