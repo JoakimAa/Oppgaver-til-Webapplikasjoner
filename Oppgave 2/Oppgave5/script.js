@@ -106,11 +106,9 @@ function startup() {
             btn4.parentNode.parentNode.removeChild(liel4);
         })
         liel4.appendChild(btn4);
-    
     };
     
-    
-    // Prøvde å få til en måte å lage liste elemetene i en loop, men de blir ikke slettet rikgit. Og fikk litt dårlig tid
+    // Prøvde å få til en måte å lage liste elemetene i en loop, men de blir ikke slettet riktig. Og fikk litt dårlig tid
     // function createListElements() {
     //     for (var i = 1; i <= 4; i++){
     //         var eld = document.createElement("button")
