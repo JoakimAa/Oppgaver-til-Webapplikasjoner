@@ -106,9 +106,7 @@ function startup() {
             btn4.parentNode.parentNode.removeChild(liel4);
         })
         liel4.appendChild(btn4);
-    
     };
-    
     
     // Prøvde å få til en måte å lage liste elemetene i en loop, men de blir ikke slettet riktig.
     // function createListElements() {
