@@ -1,11 +1,24 @@
 window.onload = startup;
 
 var todoArray = []
-var tempArray = []
 
 function startup() {
 
     let modal = document.getElementById("newTodo");
+
+    var todoDescription = document.getElementById("inpDescription");
+    todoDescription.addEventListener("keydown", function(e) {
+        var maxChar = document.getElementById("inpDescription").maxLength;
+        var todoDescriptionLength = document.getElementById("inpDescription").value.length;
+
+        if (todoDescriptionLength >= maxChar){
+            e.preventDefault();
+        } 
+        else{
+            var charsLeft = maxChar - todoDescriptionLength - 1;
+            document.getElementById("todoTextDescription").innerHTML = "Description (" + charsLeft + " characters remaining)";
+        }
+    });
 
     document.getElementById("bTodo").addEventListener("click", function() {
         modal.style.display = "block"
@@ -13,11 +26,10 @@ function startup() {
 
     document.getElementById("bCreate").addEventListener("click", function(){
         var todoTitle = document.getElementById("inpTodoTitle").value;
-        var todoDescription = document.getElementById("inpDescription").value;
+        var todoDescriptionValue = document.getElementById("inpDescription").value;
         var todoAuthor = document.getElementById("inpAuthor").value;
-        var todoCard = {title:todoTitle, description:todoDescription, author:todoAuthor};
-
-        document.getElementById("newTodoFlex").reset();
+        var todoCard = {title:todoTitle, description:todoDescriptionValue, author:todoAuthor};
+        resetModal();
 
         todoArray.push(todoCard);
         modal.style.display = "none"
@@ -27,28 +39,29 @@ function startup() {
 
     document.getElementById("modalX").addEventListener("click",function() {
         modal.style.display = "none"
+        resetModal();
     });
 
 
     // window.addEventListener("click", function(){
     //     if (event.target == modal)
-    //     modal.style.display = "none"
+    //         modal.style.display = "none"
+    //         resetModal();
     // })
 
     }
 
+function resetModal() {
+    document.getElementById("todoTextDescription").innerHTML = "Description (30 characters remaining)";
+    document.getElementById("newTodoFlex").reset();
+}
+
 function populateCardList() {
-
-    if (todoArray.length > 0) {
-         if (tempArray.length < 3) {
-             tempArray.push(todoArray.pop());
-         }
+    if (todoArray.length < 3) {
+        var loop = todoArray.length
     }
-
-    if (tempArray.length > 0) {
-        for (var i = 0; i < tempArray.length; i++) {
-            tempArray[i].id = i;
-        }
+    else {
+        var loop = 3;
     }
     
     var cardList = document.getElementById("flexTwo");
@@ -57,15 +70,14 @@ function populateCardList() {
         cardList.removeChild(cardList.firstChild);
     }
      
-    for (var i = 0; i < tempArray.length;  i++) {
+    for (var i = 1; i <= loop;  i++) {
         var todoCardArticle = document.createElement("article");
-        todoCardArticle.id = i
 
         var todoCardH2 = document.createElement("h2");
-        todoCardH2.innerHTML = tempArray[i].title;
+        todoCardH2.innerHTML = todoArray[todoArray.length-i].title;
         
         var todoCardP = document.createElement("p");
-        todoCardP.innerHTML = tempArray[i].description;
+        todoCardP.innerHTML = todoArray[todoArray.length-i].description;
 
         var todoCardDiv = document.createElement("div");
         todoCardDiv.className = "buttonFlex";
@@ -73,15 +85,14 @@ function populateCardList() {
         var todoCardButtonDel = document.createElement("button");
         todoCardButtonDel.className = "bDelete";
         todoCardButtonDel.innerHTML = "Delete"
-        todoCardButtonDel.value = i;
 
-        setEvenListenerDel(todoCardButtonDel, i);
+        setEvenListenerDel(todoCardButtonDel, todoArray.length-i);
        
         var todoCardButtonCom = document.createElement("button");
         todoCardButtonCom.innerHTML = "Complete"
         todoCardButtonCom.className = "bComplete";
         
-        setEvenListenerCom(todoCardButtonCom, i);
+        setEvenListenerCom(todoCardButtonCom, todoArray.length-i);
 
         document.getElementById("flexTwo").appendChild(todoCardArticle);
         todoCardArticle.appendChild(todoCardH2);
@@ -94,7 +105,7 @@ function populateCardList() {
 
 function setEvenListenerCom(todoCardButtonCom, number) {
     todoCardButtonCom.addEventListener("click", function(evt){
-        var completedTodo = tempArray.splice(number, 1)
+        var completedTodo = todoArray.splice(number, 1)
         populateCompletedTodos(completedTodo);
         populateCardList();
     })
@@ -102,7 +113,7 @@ function setEvenListenerCom(todoCardButtonCom, number) {
 
 function setEvenListenerDel(todoCardButtonDel, number) {
     todoCardButtonDel.addEventListener("click", function(evt){
-        tempArray.splice(number, 1);
+        todoArray.splice(number, 1);
         populateCardList();
     })
 }

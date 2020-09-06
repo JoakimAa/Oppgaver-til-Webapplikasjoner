@@ -179,6 +179,14 @@ tr {
     text-shadow: 0px 0px 0px transparent;
 }
 
+#bCreate {
+    margin-top: 20px;
+}
+
+label {
+    padding-top: 10px;
+}
+
 
 
 
