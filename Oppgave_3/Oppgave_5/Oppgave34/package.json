@@ -1,0 +1,17 @@
+{
+  "name": "oppgave34",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Oppgave34.js",
+  "scripts": {
+    "dev": "webpack-dev-server --open --mode development",
+    "build": "webpack --mode production"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  }
+}
