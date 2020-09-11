@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="Oppgave2.css">
+    <script type="text/javascript" src="bundle.js"></script>
+    <title>Oppgave 3 og 4</title>
+</head>
+<body>
+    <div id="grid">
+        <header>
+            <h1 id="hiof">HIOF</h1>
+            <hp id="hUser">User user</h3>
+        </header>
+        <main>
+            <div id="flexOne">
+                <button id="bTodo">+ Todo</button>
+            </div>
+            <div id="flexTwo">
+            </div>
+            <div id="flexThree">
+                <h2 id="completedTodo">Completed todos</h2>
+                <table id="completedTodoTable">
+                    <tr>
+                        <th id="title">Title</th>
+                        <th id="author">Author</th>
+                        <th id="description">Description</th>
+                        <th id="completedDate">Completed date</th>
+                    </tr>
+                </table>
+            </div>
+        </main>
+    </div>
+    <div id="newTodo"> 
+        <div class="newTodoContent">
+            <div id="topElements">
+                <h1>New todo</h1> 
+                <button id="modalX">X</button>
+            </div>
+            <form id="newTodoFlex" method="POST">
+                <label for="inpTodoTitle">Title</label>
+                <input type="text" id="inpTodoTitle" name="inpTodoTitle" placeholder="Todotitle">
+                <label for="inpDescription" id="todoTextDescription">Description (30 characters remaining)</label>
+                <input type="text" id="inpDescription" name="inpDescription" maxlength="30" placeholder="Lorem ipsum dollor sitane">
+                <label for="inpAuthor">Author</label>
+                <input type="text" id="inpAuthor" name="inpAuthor" placeholder="Author Author">
+                <button id="bCreate" type="button" >Create</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
