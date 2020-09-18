@@ -474,8 +474,7 @@ line 2`);
 			};
 		
 		// Use destructuring to change the 3 statements below into 1 statement.
-		// Dette funker, men virker ikke helt optimalt
-		let {add: a, city: {name: b}, arr: temp, c = temp.slice(1)} = obj; 
+		let {add: a, city: {name: b}, arr: [, ...c]} = obj; 
 
 		/* let a = obj.add;
 		let b = obj.city.name;
