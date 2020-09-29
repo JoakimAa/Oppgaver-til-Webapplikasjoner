@@ -2,7 +2,7 @@
   "name": "oppgave_5",
   "version": "1.0.0",
   "main": "index.js",
-  "author": "",
+  "author": "Joakim",
   "license": "ISC",
   "scripts": {
     "build": "webpack --config webpack.production.config.js",
