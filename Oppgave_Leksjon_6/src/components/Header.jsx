@@ -4,7 +4,7 @@ import Nav from './Nav.jsx';
 const Header = () => (
   <>
     <header>
-      <Nav nav />
+      <Nav />
     </header>
   </>
 );

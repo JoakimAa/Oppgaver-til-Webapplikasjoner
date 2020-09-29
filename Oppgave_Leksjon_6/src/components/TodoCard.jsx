@@ -1,9 +1,9 @@
 import React from 'react';
 
-const TodoCard = () => (
+const TodoCard = ({ todoTitle, todoDesc }) => (
   <article>
-    <h2>Todotitle</h2>
-    <p>Description</p>
+    <h2>{todoTitle}</h2>
+    <p>{todoDesc}</p>
     <div className="buttonFlex">
       <button type="button" className="bDelete">
         Delete

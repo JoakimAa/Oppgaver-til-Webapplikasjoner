@@ -1,28 +1,25 @@
 import React from 'react';
+import TodoButton from './TodoButton';
 import TodoCard from './TodoCard';
 
-const Main = () => (
+const Main = ({ todoCard }) => (
   <>
     <main>
       <div id="flexOne">
-        <button type="button" id="bTodo">
-          + Todo
-        </button>
+        <TodoButton />
       </div>
       <div id="flexTwo">
-        <TodoCard />
-        <TodoCard />
-        <TodoCard />
+        <TodoCard todoCard={todoCard} />
       </div>
       <div id="flexThree">
         <h2 id="completedTodo">Completed todos</h2>
         <table id="completedTodoTable">
-          <tr>
+          <thead>
             <th id="title">Title</th>
             <th id="author">Author</th>
             <th id="description">Description</th>
             <th id="completedDate">Completed date</th>
-          </tr>
+          </thead>
         </table>
       </div>
     </main>
