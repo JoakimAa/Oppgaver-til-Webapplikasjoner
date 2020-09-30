@@ -1,16 +1,11 @@
 import React from 'react';
 
-const TodoButton = () => {
-  const showModal = () => {
-    document.getElementById('newTodo').style.display = 'block';
-  };
-  return (
-    <>
-      <button type="button" id="bTodo" onClick={showModal}>
-        + Todo
-      </button>
-    </>
-  );
-};
+const TodoButton = ({ setModal, modal }) => (
+  <>
+    <button type="button" id="bTodo" onClick={() => setModal(!modal)}>
+      + Todo
+    </button>
+  </>
+);
 
 export default TodoButton;

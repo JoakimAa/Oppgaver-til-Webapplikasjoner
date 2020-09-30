@@ -4,44 +4,60 @@ import Main from './src/components/Main.jsx';
 import Modal from './src/components/Modal.jsx';
 
 const App = () => {
-  const [todoTitle, setTodoTitle] = useState('');
-  const [todoDesc, setTodoDesc] = useState('');
-  const [todoAuthor, setTodoAuthor] = useState('');
-  let todoCard;
+  const [modal, setModal] = useState(false);
+  const [count, setCount] = useState(0);
+  const [todoTitle, setTodoTitle] = useState({ title: '' });
+  const [todoDesc, setTodoDesc] = useState({ description: '' });
+  const [todoAuthor, setTodoAuthor] = useState({ author: '' });
+  const [todos, setTodos] = useState([]);
+  const [todosCompleted, setTodosCompleted] = useState([]);
 
-  const displayTodoTitle = (e) => {
-    setTodoTitle(e.target.vale);
-  };
-  const displayTodoDesc = (e) => {
-    setTodoDesc(e.target.vale);
-  };
-  const displayTodoAuthor = (e) => {
-    setTodoAuthor(e.target.vale);
+  const addTodoCardToCompletedList = (todo) => {
+    setTodosCompleted([...todosCompleted, todo]);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    todoCard = {
-      title: todoTitle,
-      description: todoDesc,
-      author: todoAuthor,
-    };
-    e.target.parentNode.parentNode.parentNode.style.display = 'none';
+  const addTodoCard = () => {
+    setTodos((prev) => [
+      {
+        id: count,
+        ...todoTitle,
+        ...todoDesc,
+        ...todoAuthor,
+      },
+      ...prev,
+    ]);
+    setCount(count + 1);
+  };
+
+  const removeTodo = (id) => {
+    const updatedTodos = todos.filter((todo) => todo.id !== id);
+    setTodos(updatedTodos);
   };
 
   return (
     <>
       <Header />
-      <Main todoCard={todoCard} />
-      <Modal
-        displayTodoTitle={displayTodoTitle}
-        todoTitle={todoTitle}
-        displayTodoDesc={displayTodoDesc}
-        todoDesc={todoDesc}
-        displayTodoAuthor={displayTodoAuthor}
-        todoAuthor={todoAuthor}
-        handleSubmit={handleSubmit}
+      <Main
+        todos={todos}
+        removeTodo={removeTodo}
+        setModal={setModal}
+        modal={modal}
+        todosCompleted={todosCompleted}
+        addTodoCardToCompletedList={addTodoCardToCompletedList}
       />
+      {modal && (
+        <Modal
+          todoTitle={todoTitle}
+          setTodoTitle={setTodoTitle}
+          todoDesc={todoDesc}
+          setTodoDesc={setTodoDesc}
+          todoAuthor={todoAuthor}
+          setTodoAuthor={setTodoAuthor}
+          addTodoCard={addTodoCard}
+          setModal={setModal}
+          modal={modal}
+        />
+      )}
     </>
   );
 };

@@ -1,14 +1,25 @@
 import React from 'react';
 
-const TodoCard = ({ todoTitle, todoDesc }) => (
+const TodoCard = ({ todo, removeTodo, addTodoCardToCompletedList }) => (
   <article>
-    <h2>{todoTitle}</h2>
-    <p>{todoDesc}</p>
+    <h2>{todo.title}</h2>
+    <p>{todo.description}</p>
     <div className="buttonFlex">
-      <button type="button" className="bDelete">
+      <button
+        type="button"
+        className="bDelete"
+        onClick={() => removeTodo(todo.id)}
+      >
         Delete
       </button>
-      <button type="button" className="bComplete">
+      <button
+        type="button"
+        className="bComplete"
+        onClick={() => {
+          addTodoCardToCompletedList(todo);
+          removeTodo(todo.id);
+        }}
+      >
         Complete
       </button>
     </div>

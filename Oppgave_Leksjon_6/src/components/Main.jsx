@@ -1,26 +1,34 @@
 import React from 'react';
+import CompletedList from './CompletedList';
 import TodoButton from './TodoButton';
-import TodoCard from './TodoCard';
+import TodoCardList from './TodoCardList';
 
-const Main = ({ todoCard }) => (
+const Main = ({
+  todos,
+  removeTodo,
+  setModal,
+  modal,
+  todosCompleted,
+  addTodoCardToCompletedList,
+}) => (
   <>
     <main>
       <div id="flexOne">
-        <TodoButton />
+        <TodoButton setModal={setModal} modal={modal} />
       </div>
       <div id="flexTwo">
-        <TodoCard todoCard={todoCard} />
+        {todos && todos.length < 1 ? (
+          <p>Jippi! Ingen todos i dag</p>
+        ) : (
+          <TodoCardList
+            todos={todos}
+            removeTodo={removeTodo}
+            addTodoCardToCompletedList={addTodoCardToCompletedList}
+          />
+        )}
       </div>
       <div id="flexThree">
-        <h2 id="completedTodo">Completed todos</h2>
-        <table id="completedTodoTable">
-          <thead>
-            <th id="title">Title</th>
-            <th id="author">Author</th>
-            <th id="description">Description</th>
-            <th id="completedDate">Completed date</th>
-          </thead>
-        </table>
+        <CompletedList todosCompleted={todosCompleted} />
       </div>
     </main>
   </>
