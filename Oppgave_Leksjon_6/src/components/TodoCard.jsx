@@ -1,8 +1,9 @@
 import React from 'react';
+import Title from './Title';
 
 const TodoCard = ({ todo, removeTodo, addTodoCardToCompletedList }) => (
   <article>
-    <h2>{todo.title}</h2>
+    <Title title={todo.title} />
     <p>{todo.description}</p>
     <div className="buttonFlex">
       <button

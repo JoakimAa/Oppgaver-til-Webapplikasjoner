@@ -34,5 +34,4 @@ const Main = ({
   </>
 );
 
-// TODO: Add plus symbol
 export default Main;

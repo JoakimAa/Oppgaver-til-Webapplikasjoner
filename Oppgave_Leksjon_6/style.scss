@@ -3,6 +3,19 @@
     margin: auto;
 }
 
+#search {
+    display: flex;
+    flex-flow: row;
+    justify-content: flex-end;
+
+    label, input {
+        margin: 10px;
+        padding: 5px;
+    }
+}
+
+
+
 #hiof {
     padding: 10px 0px 10px 20px;
     float: left;
