@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Search = ({search, handleSearch}) => (
+const Search = ({ search, handleSearch }) => (
   <>
     <div id="search">
       <input

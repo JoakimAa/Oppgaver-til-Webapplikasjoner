@@ -6,9 +6,11 @@ import Modal from './src/components/Modal.jsx';
 const App = () => {
   const [modal, setModal] = useState(false);
   const [count, setCount] = useState(0);
-  const [todoTitle, setTodoTitle] = useState({ title: '' });
-  const [todoDesc, setTodoDesc] = useState({ description: '' });
-  const [todoAuthor, setTodoAuthor] = useState({ author: '' });
+  const [formData, setFormData] = useState({
+    title: '',
+    description: '',
+    author: '',
+  });
   const [todos, setTodos] = useState([]);
   const [todosCompleted, setTodosCompleted] = useState([]);
 
@@ -20,9 +22,7 @@ const App = () => {
     setTodos((prev) => [
       {
         id: count,
-        ...todoTitle,
-        ...todoDesc,
-        ...todoAuthor,
+        ...formData,
       },
       ...prev,
     ]);
@@ -47,12 +47,8 @@ const App = () => {
       />
       {modal && (
         <Modal
-          todoTitle={todoTitle}
-          setTodoTitle={setTodoTitle}
-          todoDesc={todoDesc}
-          setTodoDesc={setTodoDesc}
-          todoAuthor={todoAuthor}
-          setTodoAuthor={setTodoAuthor}
+          formData={formData}
+          setFormData={setFormData}
           addTodoCard={addTodoCard}
           setModal={setModal}
           modal={modal}

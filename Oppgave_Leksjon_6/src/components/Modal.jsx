@@ -1,20 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const Modal = ({
-  todoTitle,
-  setTodoTitle,
-  todoDesc,
-  setTodoDesc,
-  todoAuthor,
-  setTodoAuthor,
-  addTodoCard,
-  setModal,
-  modal,
-}) => {
+const Modal = ({ setFormData, formData, addTodoCard, setModal, modal }) => {
+  const [descChars, setDescChars] = useState(0);
+
+  const description = `Description (${50 - descChars}  characters left)`;
+
   const resetForm = () => {
-    setTodoTitle('');
-    setTodoDesc('');
-    setTodoAuthor('');
+    setFormData('');
   };
 
   const handleSubmit = (e) => {
@@ -23,14 +15,28 @@ const Modal = ({
     setModal(!modal);
     resetForm();
   };
-  const displayTodoTitle = (e) => {
-    setTodoTitle({ title: e.target.value });
+  const changeTodoTitle = (e) => {
+    setFormData({
+      title: e.target.value,
+      description: formData.description,
+      author: formData.author,
+    });
   };
-  const displayTodoDesc = (e) => {
-    setTodoDesc({ description: e.target.value });
+  const changeTodoDesc = (e) => {
+    setFormData({
+      title: formData.title,
+      description: e.target.value,
+      author: formData.author,
+    });
+
+    setDescChars(e.target.value.length);
   };
-  const displayTodoAuthor = (e) => {
-    setTodoAuthor({ author: e.target.value });
+  const changeTodoAuthor = (e) => {
+    setFormData({
+      title: formData.title,
+      description: formData.description,
+      author: e.target.value,
+    });
   };
 
   return (
@@ -57,26 +63,27 @@ const Modal = ({
               name="inpTodoTitle"
               id="inpTodoTitle"
               placeholder="Todotitle"
-              onChange={displayTodoTitle}
-              value={todoTitle.title}
+              onChange={changeTodoTitle}
+              value={formData.title}
             />
-            <label htmlFor="inpDescription">Description</label>
+            <label htmlFor="inpDescription">{description} </label>
             <input
               type="text"
               name="inpDescription"
               id="inpDescription"
               placeholder="Lorem ipsum dollor sitane"
-              onChange={displayTodoDesc}
-              value={todoDesc.desc}
+              onChange={changeTodoDesc}
+              value={formData.description}
+              maxLength={50}
             />
             <label htmlFor="inpAuthor">Author</label>
             <input
               type="text"
               name="inpAuthor"
               id="inpAuthor"
-              placeholder="Author Author"
-              onChange={displayTodoAuthor}
-              value={todoAuthor.author}
+              placeholder="Author"
+              onChange={changeTodoAuthor}
+              value={formData.author}
             />
             <button type="submit" id="bCreate" onClick={handleSubmit}>
               Create
