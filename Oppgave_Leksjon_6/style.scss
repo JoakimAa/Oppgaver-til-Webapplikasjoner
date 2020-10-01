@@ -158,12 +158,14 @@ tr {
     padding: 20px 22px;
 }
 
-#newTodoFlex > * {
-    margin: 0;
-}
+#newTodoFlex {
+    > * {
+        margin: 0;
+    }
 
-#newTodoFlex h1  {
-    font-size: 15px;
+    h1  {
+        font-size: 15px;
+    }
 }
 
 #topElements {
@@ -171,24 +173,24 @@ tr {
     flex-flow: row;
     justify-content: space-between;
     border-bottom: 1px solid black;
-}
 
-#topElements > * {
-    margin: 0;
-}
+    > * {
+        margin: 0;
+    }
 
-#topElements h1 {
-    font-size: 20px;
-    padding: 22px 0px 10px 22px;
-}
+    h1 {
+        font-size: 20px;
+        padding: 22px 0px 10px 22px;
+    }
 
-#topElements button {
-    font-size: 20px;
-    padding: 20px;
-    background: transparent;
-    box-shadow: 0px 0px 0px transparent;
-    border: 0px solid transparent;
-    text-shadow: 0px 0px 0px transparent;
+    button {
+        font-size: 20px;
+        padding: 20px;
+        background: transparent;
+        box-shadow: 0px 0px 0px transparent;
+        border: 0px solid transparent;
+        text-shadow: 0px 0px 0px transparent;
+    }
 }
 
 #bCreate {

@@ -2,18 +2,33 @@ import React, { useState } from 'react';
 
 const Modal = ({ setFormData, formData, addTodoCard, setModal, modal }) => {
   const [descChars, setDescChars] = useState(0);
+  const [msgTrue, setmsgTrue] = useState(false);
+  const errorMessage = 'You need to fill out all the fields';
 
   const description = `Description (${50 - descChars}  characters left)`;
 
   const resetForm = () => {
-    setFormData('');
+    setFormData({
+      title: '',
+      description: '',
+      author: '',
+    });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addTodoCard();
-    setModal(!modal);
-    resetForm();
+    if (
+      formData.title === '' ||
+      formData.description === '' ||
+      formData.author === ''
+    )
+      setmsgTrue(true);
+    else {
+      setmsgTrue(false);
+      addTodoCard();
+      setModal(!modal);
+      resetForm();
+    }
   };
   const changeTodoTitle = (e) => {
     setFormData({
@@ -57,6 +72,7 @@ const Modal = ({ setFormData, formData, addTodoCard, setModal, modal }) => {
             </button>
           </div>
           <form id="newTodoFlex">
+            {msgTrue && <p>{errorMessage}</p>}
             <label htmlFor="inpTodoTitle">Title</label>
             <input
               type="text"
