@@ -16,6 +16,8 @@ const NavMenu = styled.ul`
 `;
 
 const NavMenuItem = styled.li`
+  display: flex;
+  flex-direction: row;
   padding: 0 20px;
 
   &:first-child {
@@ -23,17 +25,18 @@ const NavMenuItem = styled.li`
   }
 
   & > a {
-    color: #333;
+    color: ;
     display: block;
     font-size: 14px;
     font-weight: 700;
     line-height: 3.456;
     padding: 5px 0;
     text-decoration: none;
+    margin: 10px;
 
     &.active {
-      color: #007b5f;
-      border-bottom: 4px solid #007b5f;
+      color: #0c049e;
+      border-bottom: 4px solid #0c049e;
     }
   }
 `;
@@ -43,7 +46,13 @@ const Nav = () => (
     <NavMenu>
       <NavMenuItem>
         <NavLink exact to="/" activeClassName="active">
-          Events
+          Hjem
+        </NavLink>
+        <NavLink exact to="/newpoll" activeClassName="active">
+          Lag ny poll
+        </NavLink>
+        <NavLink exact to="/signup" activeClassName="active">
+          Registrer bruker
         </NavLink>
       </NavMenuItem>
     </NavMenu>

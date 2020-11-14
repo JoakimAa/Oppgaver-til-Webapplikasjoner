@@ -1,6 +1,6 @@
 import http from './http';
 
-const API_URL = '/poll';
+const API_URL = '/polls';
 
 export const list = async () => {
   try {

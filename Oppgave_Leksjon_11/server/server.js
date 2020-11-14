@@ -1,15 +1,17 @@
 import express from 'express';
+import cors from 'cors';
 import morgan from 'morgan';
 import connectDatabase from './config/db.js';
 import user from './routes/user.js';
 import poll from './routes/poll.js';
 
-import { PORT } from './constants/index.js';
+import { PORT, corsOptionsAllowedAll } from './constants/index.js';
 import 'dotenv/config.js';
 import errorMiddleware from './middleware/error.js';
 
 const app = express();
 app.use(express.json());
+app.use(cors(corsOptionsAllowedAll));
 
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));

@@ -3,14 +3,22 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import NoMatch from '../components/NoMatch';
 
 import MainLayout from '../layouts/MainLayout';
-import Polls from '../pages/Polls';
+import Home from '../pages/Home';
+import SignUp from '../pages/SignUp';
+import NewPoll from '../pages/NewPoll';
 
 const Routes = () => (
   <Router>
     <MainLayout>
       <Switch>
         <Route exact path="/">
-          <Polls />
+          <Home />
+        </Route>
+        <Route exact path="/signup">
+          <SignUp />
+        </Route>
+        <Route exact path="/newpoll">
+          <NewPoll />
         </Route>
         <Route path="*">
           <NoMatch />
