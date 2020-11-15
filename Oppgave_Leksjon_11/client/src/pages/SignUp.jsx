@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { Box, Heading, Flex, Text, Icon } from '@chakra-ui/core';
+import {
+  /*  Box, */ Heading /* Flex, */ /* Text, Icon */,
+} from '@chakra-ui/core';
 import Form from '../components/Form.jsx';
-import { create } from '../utils/userService';
+import { create } from '../utils/authService';
 
 const SignUp = () => {
   const [formData, setFormData] = useState({
@@ -12,10 +14,7 @@ const SignUp = () => {
   const [error, setError] = useState(null);
 
   const createUser = async () => {
-    const { error } = await create(formData);
-    if (error) {
-      setError(error);
-    }
+    await create(formData);
   };
 
   return (
@@ -28,6 +27,7 @@ const SignUp = () => {
         setFormData={setFormData}
         createUser={createUser}
         error={error}
+        setError={setError}
       />
     </section>
   );

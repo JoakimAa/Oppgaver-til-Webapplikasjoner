@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import slugify from 'slugify';
 
 const { Schema } = mongoose;
 
@@ -12,18 +11,21 @@ const PollSchema = new Schema(
     },
 
     userId: {
-      type: String,
+      type: mongoose.Schema.ObjectId,
       ref: 'User',
       required: true,
     },
-    slug: String,
+
+    question: {
+      type: String,
+      required: true,
+    },
+
+    answer: {
+      type: String,
+    },
   },
   { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );
-
-PollSchema.pre('save', function (next) {
-  this.slug = slugify(this.name, { lower: true });
-  next();
-});
 
 export default mongoose.model('Poll', PollSchema);

@@ -25,7 +25,6 @@ const NavMenuItem = styled.li`
   }
 
   & > a {
-    color: ;
     display: block;
     font-size: 14px;
     font-weight: 700;
@@ -53,6 +52,9 @@ const Nav = () => (
         </NavLink>
         <NavLink exact to="/signup" activeClassName="active">
           Registrer bruker
+        </NavLink>
+        <NavLink exact to="/signin" activeClassName="active">
+          Logg inn
         </NavLink>
       </NavMenuItem>
     </NavMenu>

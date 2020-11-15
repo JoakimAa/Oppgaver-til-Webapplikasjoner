@@ -1,10 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Heading, Flex, Text, Icon } from '@chakra-ui/core';
+import { Box, Heading, Flex } from '@chakra-ui/core';
+import { useHistory } from 'react-router-dom';
 import { list } from '../utils/pollService';
 
-const Home = () => {
+/* const /* StyledButton */
+
+const Home = ({ setCurrentPoll }) => {
   const [polls, setPolls] = useState(null);
   const [error, setError] = useState(null);
+  const history = useHistory();
+
+  const redirectToPoll = (id) => {
+    setCurrentPoll(id);
+    history.push(`/activepoll`);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -13,7 +22,6 @@ const Home = () => {
         setError(error);
       } else {
         setPolls(data);
-        console.log(data);
       }
     };
     fetchData();
@@ -24,19 +32,17 @@ const Home = () => {
       <Heading mb={2} as="h1" size="md">
         Hjem
       </Heading>
-      {console.log(polls)}
       {error && <p>{error}</p>}
       <Flex>
         {polls &&
           polls.map((poll) => (
             <Box p="6" as="article" key={poll.id}>
-              <Heading mb={2} as="h2" size="sm">
+              <Heading mb={2} as="h2" size="mb">
                 {poll.name}
               </Heading>
-              <Text fontSize="lg" mb={2}>
-                <Icon name="time" mr={2} />
-                {new Date(poll.createdAt).toDateString()}
-              </Text>
+              <button type="button" onClick={() => redirectToPoll(poll.id)}>
+                Ta spørreundersøkelse
+              </button>
             </Box>
           ))}
       </Flex>

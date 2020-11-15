@@ -18,7 +18,13 @@ const StyledButton = styled.button`
   margin: 0px 0px 20px 0px;
 `;
 
-const Form = ({ formData, setFormData, createUser, error, setError }) => {
+const LogInForm = ({
+  formData,
+  setFormData,
+  logInWithUser,
+  error,
+  setError,
+}) => {
   const [msgTrue, setMsgTrue] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const history = useHistory();
@@ -33,31 +39,27 @@ const Form = ({ formData, setFormData, createUser, error, setError }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (
-      formData.username === '' ||
-      formData.password === '' ||
-      formData.email === ''
-    ) {
+    if (formData.password === '' || formData.email === '') {
       setErrorMsg('Du må fylle inn alle feltene');
       setMsgTrue(true);
     } else {
       setMsgTrue(false);
-      createUser();
+      logInWithUser();
       setError(null);
       history.push(`/`);
     }
   };
 
   return (
-    <StyledForm id="newUser">
-      <label htmlFor="inpUsername">Brukernavn</label>
+    <StyledForm id="logIn">
+      <label htmlFor="inpUsername">Epost</label>
       <StyledInput
         type="text"
-        name="username"
-        id="inpUsername"
-        placeholder="Brukernavn"
+        name="email"
+        id="inpEmail"
+        placeholder="Epost"
         onChange={updateValue}
-        value={formData.username}
+        value={formData.email}
       />
       <label htmlFor="inpUsername">Passord</label>
       <StyledInput
@@ -68,21 +70,12 @@ const Form = ({ formData, setFormData, createUser, error, setError }) => {
         onChange={updateValue}
         value={formData.password}
       />
-      <label htmlFor="inpUsername">Epost</label>
-      <StyledInput
-        type="text"
-        name="email"
-        id="inpEmail"
-        placeholder="Epost"
-        onChange={updateValue}
-        value={formData.email}
-      />
       <StyledButton type="submit" id="bCreate" onClick={handleSubmit}>
-        Registrer
+        Logg inn
       </StyledButton>
       {msgTrue && error && errorMsg}
     </StyledForm>
   );
 };
 
-export default Form;
+export default LogInForm;

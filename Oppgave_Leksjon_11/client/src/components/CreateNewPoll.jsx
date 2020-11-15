@@ -1,6 +1,5 @@
 import React, { /* useEffect, */ useState } from 'react';
 import styled from 'styled-components';
-import { useHistory } from 'react-router-dom';
 
 const StyledForm = styled.form`
   display: flex;
@@ -18,71 +17,65 @@ const StyledButton = styled.button`
   margin: 0px 0px 20px 0px;
 `;
 
-const Form = ({ formData, setFormData, createUser, error, setError }) => {
+const CreateNewPoll = ({
+  formData,
+  setFormData,
+  createPoll,
+  error,
+  setError,
+  currentUser,
+}) => {
   const [msgTrue, setMsgTrue] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
-  const history = useHistory();
 
   const updateValue = (event) => {
     const inputValue = { [event.target.name]: event.target.value };
     setFormData((prev) => ({
       ...prev,
       ...inputValue,
+      userId: currentUser.id,
     }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (
-      formData.username === '' ||
-      formData.password === '' ||
-      formData.email === ''
-    ) {
+    if (formData.name === '' || formData.question === '') {
       setErrorMsg('Du må fylle inn alle feltene');
       setMsgTrue(true);
     } else {
       setMsgTrue(false);
-      createUser();
+      createPoll();
       setError(null);
-      history.push(`/`);
     }
   };
 
   return (
-    <StyledForm id="newUser">
-      <label htmlFor="inpUsername">Brukernavn</label>
+    <StyledForm id="newPoll">
+      <label htmlFor="inpName">Navn</label>
       <StyledInput
         type="text"
-        name="username"
-        id="inpUsername"
-        placeholder="Brukernavn"
+        name="name"
+        id="inpNavn"
+        placeholder="Navn"
         onChange={updateValue}
-        value={formData.username}
+        value={formData.name}
       />
-      <label htmlFor="inpUsername">Passord</label>
-      <StyledInput
-        type="password"
-        name="password"
-        id="inpPassword"
-        placeholder="Passord"
-        onChange={updateValue}
-        value={formData.password}
-      />
-      <label htmlFor="inpUsername">Epost</label>
+      <label htmlFor="inpQestion">Spørsmål</label>
       <StyledInput
         type="text"
-        name="email"
-        id="inpEmail"
-        placeholder="Epost"
+        name="question"
+        id="inpQestion"
+        placeholder="Spørsmål"
         onChange={updateValue}
-        value={formData.email}
+        value={formData.question}
       />
       <StyledButton type="submit" id="bCreate" onClick={handleSubmit}>
-        Registrer
+        Lag poll
       </StyledButton>
-      {msgTrue && error && errorMsg}
+      {msgTrue && errorMsg}
+      {error && <p>{error.message}</p>}
     </StyledForm>
   );
 };
 
-export default Form;
+export default CreateNewPoll;
