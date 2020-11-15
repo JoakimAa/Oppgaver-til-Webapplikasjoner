@@ -29,6 +29,7 @@ const NewPoll = ({ currentUser }) => {
     if (error) {
       setError(error);
     }
+    history.push('/');
   };
 
   return (
