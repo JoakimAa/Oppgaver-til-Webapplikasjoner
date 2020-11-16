@@ -126,5 +126,10 @@
     "node": true,
     "jquery": true,
     "jest": true
+  },
+  "globals": {
+    "shallow": true,
+    "render": true,
+    "mount": true
   }
 }

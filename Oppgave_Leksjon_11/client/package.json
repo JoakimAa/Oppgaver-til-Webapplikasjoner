@@ -11,6 +11,9 @@
     "test:coverage": "jest --coverage"
   },
   "keywords": [],
+  "setupFiles": [
+    "./test/setupTests.js"
+  ],
   "author": "",
   "license": "ISC",
   "devDependencies": {
