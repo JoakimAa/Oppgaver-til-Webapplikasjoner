@@ -14,13 +14,7 @@ const NewPoll = ({ currentUser }) => {
     name: '',
     userId: '',
     question: '',
-    answers: [
-      {
-        answer: '',
-        votecount: 0,
-      },
-      { answer: '', votecount: 0 },
-    ],
+    answer: '',
   });
   const [error, setError] = useState(null);
 

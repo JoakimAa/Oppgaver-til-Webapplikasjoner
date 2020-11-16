@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Heading } from '@chakra-ui/core';
 import styled from 'styled-components';
 import { get, put } from '../utils/pollService.js';
+import { useHistory } from 'react-router-dom';
+
 
 const StyledForm = styled.form`
   display: flex;
@@ -20,6 +22,7 @@ const StyledButton = styled.button`
 `;
 
 const ActivePoll = ({ currentPoll }) => {
+  const history = useHistory();
   const [formData, setFormData] = useState({
     answer: '',
   });
@@ -28,6 +31,7 @@ const ActivePoll = ({ currentPoll }) => {
 
   const onSubmit = async () => {
     await put(poll.id, formData);
+    history.push('/');
   };
 
   const updateValue = (event) => {

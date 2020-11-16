@@ -2,7 +2,7 @@
 // https://jestjs.io/docs/en/configuration.html
 
 module.exports = {
-  collectCoverageFrom: ['src/**/*.js?(x)'],
+  collectCoverageFrom: ['**/*.{js,jsx', '!**/node_modules/**', '!**/vendor/**'],
   // A list of reporter names that Jest uses when writing coverage reports
   // coverageReporters: [
   //   "json",
@@ -18,5 +18,6 @@ module.exports = {
   testEnvironment: 'jsdom',
 
   // The glob patterns Jest uses to detect test files
-  testMatch: ['<rootDir>/test/**/?(*.)+(spec|test).[tj]s?(x)'],
+  // testMatch: ['<rootDir>/test/**/?(*.)+(spec|test).[tj]s?(x)'],
+  testMatch: ['**/__tests__/**/*.[jt]s?(x)', '**/?(*.)+(spec|test).[jt]s?(x)'],
 };
