@@ -1,4 +1,4 @@
-import React, { /* useEffect, */ useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import { logIn } from '../utils/authService';
