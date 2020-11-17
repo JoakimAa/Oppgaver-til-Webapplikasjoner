@@ -1,29 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Heading } from '@chakra-ui/core';
 import { useHistory } from 'react-router-dom';
 import CreateNewPoll from '../components/CreateNewPoll';
-import { create } from '../utils/pollService';
 
 const NewPoll = ({ currentUser }) => {
   const history = useHistory();
   const handleClick = () => {
     history.push('/signup');
-  };
-
-  const [formData, setFormData] = useState({
-    name: '',
-    userId: '',
-    question: '',
-    answer: '',
-  });
-  const [error, setError] = useState(null);
-
-  const createPoll = async () => {
-    const { error } = await create(formData);
-    if (error) {
-      setError(error);
-    }
-    history.push('/');
   };
 
   return (
@@ -32,14 +15,7 @@ const NewPoll = ({ currentUser }) => {
         New Poll
       </Heading>
       {currentUser.username ? (
-        <CreateNewPoll
-          formData={formData}
-          setFormData={setFormData}
-          createPoll={createPoll}
-          error={error}
-          setError={setError}
-          currentUser={currentUser}
-        />
+        <CreateNewPoll currentUser={currentUser} />
       ) : (
         <div>
           <p>Du må være innlogget for å lage en ny poll</p>

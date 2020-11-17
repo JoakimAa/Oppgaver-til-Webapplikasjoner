@@ -1,32 +1,30 @@
 import React from 'react';
-import { shallow, mount} from 'enzyme';
+import { mount } from 'enzyme';
 import Form from '../src/components/Form';
 
-afterEach(() => {
-  jest.useRealTimers();
+const userBlank = {
+  password: '',
+  email: '',
+  username: '',
+};
+
+const user = {
+  username: 'asd',
+  password: 'asd',
+  email: 'asdgweew@asd.asd',
+};
+
+it('formdata is empty', () => {
+  const wrapper = mount(<Form formData={userBlank} />);
+
+  expect(wrapper.props().formData).toEqual(userBlank);
 });
 
-it('formData should be empty', () => {
-  const wrapper = shallow(<Form />);
+it('error message is true if fields are empty', () => {
+  const wrapper = mount(<Form formData={userBlank} msgTrue errorMsg />);
 
-  
-  wrapper.find('#inpUsername').simulate('change', {username: 'Ole'});
-  wrapper.find('#inpEmail').simulate('change', {username: 'ole@epost.no'});
-  wrapper.find('#inpPassword').simulate('change', {username: 'passord123'});
+  wrapper.find('[button="createUser"]').simulate('click');
 
-  wrapper.find('#inpUsername').toEqual('Ole');
-  wrapper.find('#inpEmail').toEqual('ole@epost.no');
-  wrapper.find('#inpPassword').toEqual('passord123');
+  expect(wrapper.props().msgTrue).toBeTruthy();
+  expect(wrapper.props().errorMsg).toBeTruthy();
 });
-
-// it('formData should be populated after onSubmit click', () => {
-//   const wrapper = shallow(<Form />);
-
-//   wrapper.find('#inpUsername').simulate('change', 'Ole');
-//   wrapper.find('#inpEmail').simulate('change', 'ole@epost.no');
-//   wrapper.find('#inpPassword').simulate('change', 'passord123');
-
-//   wrapper.find('#bCreate').simulate();
-//   expect(FormData.username).toEqual('Ole');
-//   expect(FormData.email).toEqual('ole@epost.no');
-//   expect(FormData.password).toEqual('passord123');

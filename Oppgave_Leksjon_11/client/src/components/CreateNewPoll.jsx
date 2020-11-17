@@ -1,5 +1,7 @@
 import React, { /* useEffect, */ useState } from 'react';
 import styled from 'styled-components';
+import { useHistory } from 'react-router-dom';
+import { create } from '../utils/pollService';
 
 const StyledForm = styled.form`
   display: flex;
@@ -17,24 +19,31 @@ const StyledButton = styled.button`
   margin: 0px 0px 20px 0px;
 `;
 
-const CreateNewPoll = ({
-  formData,
-  setFormData,
-  createPoll,
-  error,
-  setError,
-  currentUser,
-}) => {
+const CreateNewPoll = ({ currentUser }) => {
   const [msgTrue, setMsgTrue] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
+  const [formData, setFormData] = useState({
+    name: '',
+    userId: currentUser.id,
+    question: '',
+  });
+  const [error, setError] = useState(null);
+  const history = useHistory();
 
   const updateValue = (event) => {
     const inputValue = { [event.target.name]: event.target.value };
     setFormData((prev) => ({
       ...prev,
       ...inputValue,
-      userId: currentUser.id,
     }));
+  };
+
+  const createPoll = async () => {
+    const { error } = await create(formData);
+    if (error) {
+      setError(error);
+    }
+    history.push('/');
   };
 
   const handleSubmit = (e) => {
@@ -69,7 +78,7 @@ const CreateNewPoll = ({
         onChange={updateValue}
         value={formData.question}
       />
-      <StyledButton type="submit" id="bCreate" onClick={handleSubmit}>
+      <StyledButton type="submit" id="bCreateNewPoll" onClick={handleSubmit}>
         Lag poll
       </StyledButton>
       {msgTrue && errorMsg}

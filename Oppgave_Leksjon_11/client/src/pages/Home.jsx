@@ -41,7 +41,7 @@ const Home = ({ setCurrentPoll }) => {
                 {poll.name}
               </Heading>
               <button type="button" onClick={() => redirectToPoll(poll.id)}>
-                Ta spørreundersøkelse
+                Ta poll
               </button>
             </Box>
           ))}

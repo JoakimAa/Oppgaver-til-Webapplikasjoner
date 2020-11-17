@@ -1,6 +1,7 @@
 import React, { /* useEffect, */ useState } from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
+import { create } from '../utils/authService';
 
 const StyledForm = styled.form`
   display: flex;
@@ -18,9 +19,15 @@ const StyledButton = styled.button`
   margin: 0px 0px 20px 0px;
 `;
 
-const Form = ({ formData, setFormData, createUser, error, setError }) => {
+const Form = () => {
+  const [formData, setFormData] = useState({
+    username: '',
+    password: '',
+    email: '',
+  });
   const [msgTrue, setMsgTrue] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
+  const [error, setError] = useState('');
   const history = useHistory();
 
   const updateValue = (event) => {
@@ -29,6 +36,10 @@ const Form = ({ formData, setFormData, createUser, error, setError }) => {
       ...prev,
       ...inputValue,
     }));
+  };
+
+  const createUser = async () => {
+    await create(formData);
   };
 
   const handleSubmit = (e) => {
@@ -44,7 +55,7 @@ const Form = ({ formData, setFormData, createUser, error, setError }) => {
       setMsgTrue(false);
       createUser();
       setError(null);
-      history.push(`/`);
+      history.push(`/signin`);
     }
   };
 
@@ -77,10 +88,16 @@ const Form = ({ formData, setFormData, createUser, error, setError }) => {
         onChange={updateValue}
         value={formData.email}
       />
-      <StyledButton type="submit" id="bCreate" onClick={handleSubmit}>
+      <StyledButton
+        type="submit"
+        id="bCreateUser"
+        button="createUser"
+        onClick={handleSubmit}
+      >
         Registrer
       </StyledButton>
-      {msgTrue && error && errorMsg}
+      {msgTrue && error}
+      {msgTrue && <p>{errorMsg}</p>}
     </StyledForm>
   );
 };

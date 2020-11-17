@@ -11,8 +11,8 @@ import LogIn from '../pages/LogIn';
 
 const Routes = () => {
   const [currentUser, setcurrentUser] = useState({
-    username: 'Test',
-    id: '5fb1a9096c778d37041b0775', // Endre denne til en bruker id som er lagret i databasen
+    username: '',
+    id: '',
   });
   const [currentPoll, setCurrentPoll] = useState('');
 

@@ -21,6 +21,8 @@ export const sendToken = (user, res) => {
       token,
       user: {
         email: user.email,
+        id: user._id,
+        username: user.username,
         role: user.role,
       },
     });

@@ -1,6 +1,7 @@
-import React, { /* useEffect, */ useState } from 'react';
+import React, { /* useEffect, */ useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
+import { logIn } from '../utils/authService';
 
 const StyledForm = styled.form`
   display: flex;
@@ -18,16 +19,26 @@ const StyledButton = styled.button`
   margin: 0px 0px 20px 0px;
 `;
 
-const LogInForm = ({
-  formData,
-  setFormData,
-  logInWithUser,
-  error,
-  setError,
-}) => {
+const LogInForm = ({ setcurrentUser }) => {
   const [msgTrue, setMsgTrue] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const history = useHistory();
+  const [formData, setFormData] = useState({
+    username: '',
+    password: '',
+    email: '',
+  });
+  const [error, setError] = useState(null);
+
+  const logInWithUser = async () => {
+    const { data, error } = await logIn(formData);
+    if (error) {
+      setError(error);
+    }
+    if (data) {
+      setcurrentUser({ username: data.user.username, id: data.user.id });
+    }
+  };
 
   const updateValue = (event) => {
     const inputValue = { [event.target.name]: event.target.value };
@@ -70,10 +81,11 @@ const LogInForm = ({
         onChange={updateValue}
         value={formData.password}
       />
-      <StyledButton type="submit" id="bCreate" onClick={handleSubmit}>
+      <StyledButton type="submit" id="bCreateLoginForm" onClick={handleSubmit}>
         Logg inn
       </StyledButton>
-      {msgTrue && error && errorMsg}
+      {msgTrue && <p>{errorMsg}</p>}
+      {error && <p>Det har oppstått en feil, prøv igjen</p>}
     </StyledForm>
   );
 };

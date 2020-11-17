@@ -21,8 +21,13 @@ const PollSchema = new Schema(
       required: true,
     },
 
-    answer: {
-      type: String,
+    yes: {
+      type: Number,
+      default: 0,
+    },
+    no: {
+      type: Number,
+      default: 0,
     },
   },
   { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }

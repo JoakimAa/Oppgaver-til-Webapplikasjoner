@@ -1,45 +1,37 @@
 import React, { useState, useEffect } from 'react';
 import { Heading } from '@chakra-ui/core';
 import styled from 'styled-components';
-import { get, put } from '../utils/pollService.js';
 import { useHistory } from 'react-router-dom';
-
-
-const StyledForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  width: 200px;
-`;
-
-const StyledInput = styled.input`
-  margin: 0px 0px 20px 0px;
-  background-color: #cccccc;
-`;
+import { get, put } from '../utils/pollService.js';
 
 const StyledButton = styled.button`
   text-align: left;
-  margin: 0px 0px 20px 0px;
+  margin: 10px 20px 20px 0px;
+  padding: 5px 15px;
+  border-radius: 10px;
+`;
+
+const YesButton = styled.button`
+  background-color: green;
+`;
+
+const NoButton = styled.button`
+  background-color: red;
+`;
+
+const StyledFlex = styled.div`
+  display: flex;
+  flex-direction: row;
 `;
 
 const ActivePoll = ({ currentPoll }) => {
   const history = useHistory();
-  const [formData, setFormData] = useState({
-    answer: '',
-  });
   const [poll, setPoll] = useState(null);
   const [error, setError] = useState(null);
 
-  const onSubmit = async () => {
-    await put(poll.id, formData);
+  const onSubmit = async (event) => {
+    await put(poll.id, { $inc: { [event.target.value]: 1 } });
     history.push('/');
-  };
-
-  const updateValue = (event) => {
-    const inputValue = { [event.target.name]: event.target.value };
-    setFormData((prev) => ({
-      ...prev,
-      ...inputValue,
-    }));
   };
 
   useEffect(() => {
@@ -62,20 +54,26 @@ const ActivePoll = ({ currentPoll }) => {
             {poll.name}
           </Heading>
           <p>{poll.question}</p>
-          <StyledForm>
-            <label htmlFor="inpName">Svar</label>
-            <StyledInput
-              type="text"
-              name="answer"
-              id="inpAnswer"
-              placeholder="Svar"
-              onChange={updateValue}
-              value={formData.answer}
-            />
-            <StyledButton type="button" value="yes" id="yes" onClick={onSubmit}>
-              Send inn
+          <StyledFlex>
+            <StyledButton
+              as={YesButton}
+              type="button"
+              value="yes"
+              id="yes"
+              onClick={onSubmit}
+            >
+              Ja
             </StyledButton>
-          </StyledForm>
+            <StyledButton
+              as={NoButton}
+              type="button"
+              value="no"
+              id="no"
+              onClick={onSubmit}
+            >
+              Nei
+            </StyledButton>
+          </StyledFlex>
         </section>
       )}
     </>
